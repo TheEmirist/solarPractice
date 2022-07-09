@@ -1,15 +1,23 @@
 package com.practice.notavito.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.practice.notavito.models.Ad;
+import com.practice.notavito.repo.AdRepository;
+
 @Controller
 public class MainController {
 
+	@Autowired
+	private AdRepository adRepository;
+
 	@GetMapping("/")
 	public String home(Model model) {
-		model.addAttribute("title", "Главная страница");
+		Iterable<Ad> ads = adRepository.findAll();
+		model.addAttribute("ads", ads);
 		return "home";
 	}
 
