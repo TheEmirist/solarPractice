@@ -15,6 +15,20 @@ public class Ad {
     private String title, short_text, full_text;
     private int cost;
     
+    public Ad() {
+    }
+    public Ad(String title, String short_text, String full_text, int cost) {
+        this.title = title;
+        this.short_text = short_text;
+        this.full_text = full_text;
+        this.cost = cost;
+    }
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
     public int getCost() {
         return cost;
     }
