@@ -10,8 +10,9 @@
       <div class="container mt-5">
         <div th:each="el : ${ads}" class="alert alert-info mt-2">
           <h3 th:text="${el.title}"/>
+          <p><b>Цена:</b> <span th:text="${el.cost}"/></p>
           <p th:text="${el.short_text}"/>
-          <!-- <a th:href="'/' + ${el.id}">Открыть полностью</a> -->
+          <a th:href="'/' + ${el.getId()}" class="btn btn-warning">Открыть полностью</a>
         </div>
       </div>
       <footer class="text-muted py-5" th:insert="blocks/footer :: footer"></footer> 
