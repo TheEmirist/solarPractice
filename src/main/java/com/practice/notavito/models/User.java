@@ -17,6 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "usr")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -28,6 +29,16 @@ public class User {
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
+
+    public User() {
+    }
+    
+    public User(String username, String password, boolean active, Set<Role> roles) {
+        this.username = username;
+        this.password = password;
+        this.active = active;
+        this.roles = roles;
+    }
 
     public Long getId() {
         return id;

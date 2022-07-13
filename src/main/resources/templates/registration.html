@@ -6,13 +6,13 @@
     </head>
     <body>
         <h1>Registration</h1>
-        {{#message}}
-            {{message}}
-        {{/message}}
+        <p th:text="${message}"/>
         <form th:action="@{/registration}" method="post">
             <div><label> User Name : <input type="text" name="username"/> </label></div>
             <div><label> Password: <input type="password" name="password"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
+            <div><input type="submit" value="Sign Up"/></div>
         </form>
+        <a href="/login">Уже есть аккаунт</a>
+        <a href="/">На главную</a>
     </body>
 </html>
