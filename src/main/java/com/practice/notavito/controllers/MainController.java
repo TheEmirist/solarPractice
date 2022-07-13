@@ -108,4 +108,10 @@ public class MainController {
 
 		return "redirect:/";
 	}
+
+	@GetMapping("/login")
+	public String login(Model model) {
+		model.addAttribute("title", "Вход");
+		return "login";
+	}
 }
