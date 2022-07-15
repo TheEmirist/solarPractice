@@ -24,20 +24,22 @@
                 <button type="submit" class="btn btn-outline-primary me-2">Найти</button>
             </form>
             
-            <ul class="navbar-nav" th:switch="${#authentication} ? ${#authorization.expression('isAuthenticated()')} : ${false}">
+            <ul class="navbar-nav">
                 <li>
-                    <span th:case="${false}" class="col-md-2 text-end" >
+                    <span>
                         <button type="button" class="btn btn-outline-primary me-2" onclick="window.location.href = '/login'">Вход</button>
                         <button type="button" class="btn btn-primary" onclick="window.location.href = '/registration'">Регистрация</button>
                     </span>
-                    <span th:case="${true}">
+                    <span>
                         <form th:action="@{/logout}" method="post" class="col-md-1 text-end">
                             <input type="submit" class="btn btn-outline-primary me-2" value="Sign Out"/>
                         </form>
                     </span>
+                    <span>
+                        <a href="/user">Users</a>
+                    </span>
                 </li>
             </ul>
-
             <!-- <div class="dropdown text-end">
             <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
