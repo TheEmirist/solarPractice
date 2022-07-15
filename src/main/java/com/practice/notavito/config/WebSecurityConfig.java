@@ -39,19 +39,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userService)
                 .passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
-
-	// @Bean
-	// @Override
-	// public UserDetailsService userDetailsService() {
-	// 	UserDetails user =
-	// 		 User.withDefaultPasswordEncoder()
-	// 			.username("user")
-	// 			.password("password")
-	// 			.roles("USER")
-	// 			.build();
-
-	// 	return new InMemoryUserDetailsManager(user);
-	// }
-
     
 }

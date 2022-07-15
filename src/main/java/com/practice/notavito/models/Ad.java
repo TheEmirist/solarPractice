@@ -15,7 +15,8 @@ public class Ad {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String title, short_text, full_text;
+    private String title, short_text, full_text, tag;
+
     private int cost;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -24,10 +25,11 @@ public class Ad {
     
     public Ad() {
     }
-    public Ad(String title, String short_text, String full_text, int cost, User user) {
+    public Ad(String title, String short_text, String full_text, String tag, int cost, User user) {
         this.title = title;
         this.short_text = short_text;
         this.full_text = full_text;
+        this.tag = tag;
         this.cost = cost;
         this.author = user;
     }
@@ -61,7 +63,12 @@ public class Ad {
     public void setFull_text(String full_text) {
         this.full_text = full_text;
     }
-    
+    public String getTag() {
+        return tag;
+    }
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
     public User getAuthor() {
         return author;
     }

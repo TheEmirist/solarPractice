@@ -15,6 +15,13 @@
                 <input type="text" th:value="${el.title}" name="title" placeholder="Введите заголовок объявления" class="form-control"><br>
                 <input type="text" th:value="${el.short_text}" name="short_text" placeholder="Введите короткое описание" class="form-control"><br>
                 <textarea name="full_text" placeholder="Введите полное описание" class="form-control" th:text="${el.full_text}"/><br>
+                <select class="form-select" name="tag">
+                    <option></option>
+                    <option>Транспорт</option>
+                    <option>Недвижимость</option>
+                    <option>Работа</option>
+                    <option>Услуги</option>
+                </select>
                 <input type="number" th:value="${el.cost}" name="cost" placeholder="Введите цену" class="form-control"><br>
                 <button type="submit" class="btn btn-success">Обновить</button>
             </form>

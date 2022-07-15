@@ -13,22 +13,30 @@
                 <li><a href="/addAd" class="nav-link px-2 link-dark">Добавить объявление</a></li>
             </ul>
 
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-1" role="search">
-                <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-1" role="search" method="get" action="/">
+                <select class="form-select" name="filter">
+                    <option></option>
+                    <option>Транспорт</option>
+                    <option>Недвижимость</option>
+                    <option>Работа</option>
+                    <option>Услуги</option>
+                </select>
+                <button type="submit" class="btn btn-outline-primary me-2">Найти</button>
             </form>
             
-            <sec:authorize access="!isAuthenticated()">
-                <div class="col-md-2 text-end">
-                    <button type="button" class="btn btn-outline-primary me-2" onclick="window.location.href = '/login'">Вход</button>
-                    <button type="button" class="btn btn-primary" onclick="window.location.href = '/registration'">Регистрация</button>
-                </div>
-            </sec:authorize>
-
-            <sec:authorize access="isAuthenticated">
-                <form th:action="@{/logout}" method="post" class="col-md-1 text-end">
-                    <input type="submit" value="Sign Out"/>
-                </form>
-            </sec:authorize>
+            <ul class="navbar-nav" th:switch="${#authentication} ? ${#authorization.expression('isAuthenticated()')} : ${false}">
+                <li>
+                    <span th:case="${false}" class="col-md-2 text-end" >
+                        <button type="button" class="btn btn-outline-primary me-2" onclick="window.location.href = '/login'">Вход</button>
+                        <button type="button" class="btn btn-primary" onclick="window.location.href = '/registration'">Регистрация</button>
+                    </span>
+                    <span th:case="${true}">
+                        <form th:action="@{/logout}" method="post" class="col-md-1 text-end">
+                            <input type="submit" class="btn btn-outline-primary me-2" value="Sign Out"/>
+                        </form>
+                    </span>
+                </li>
+            </ul>
 
             <!-- <div class="dropdown text-end">
             <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
