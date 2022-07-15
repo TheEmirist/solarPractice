@@ -21,9 +21,18 @@ public class MainController {
 	private AdRepository adRepository;
 
 	@GetMapping("/")
-	public String home(Model model) {
+	public String home(@RequestParam(required = false) String filter, Model model) {
 		Iterable<Ad> ads = adRepository.findAll();
+
+		if (filter != null && !filter.isEmpty()) {
+			ads = adRepository.findByTag(filter);
+		} else {
+			ads = adRepository.findAll();
+		}
+
 		model.addAttribute("ads", ads);
+		model.addAttribute("filter", filter);
+
 		return "home";
 	}
 

@@ -1,6 +1,7 @@
 package com.practice.notavito.controllers;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,10 @@ public class AdController {
 	public String postAd(
 		@AuthenticationPrincipal User user,
 		@RequestParam String title, @RequestParam String short_text, 
-		@RequestParam String full_text, @RequestParam int cost, Model model) {
-		Ad ad = new Ad(title, short_text, full_text, cost, user);
+		@RequestParam String full_text, @RequestParam String tag,
+		@RequestParam int cost, Model model) {
+			
+		Ad ad = new Ad(title, short_text, full_text, tag, cost, user);
 		adRepository.save(ad);
         
 		return "redirect:/";
@@ -67,11 +70,16 @@ public class AdController {
 	}
 
 	@PostMapping("/{id}/edit")
-	public String adEdit(@PathVariable(value = "id") Long id, @RequestParam String title, @RequestParam String short_text, @RequestParam String full_text, @RequestParam int cost, Model model) {
+	public String adEdit(@PathVariable(value = "id") Long id, 
+		@RequestParam String title, @RequestParam String short_text, 
+		@RequestParam String full_text, @RequestParam String tag,
+		@RequestParam int cost, Model model) {
+
 		Ad ad = adRepository.findById(id).orElseThrow();
 		ad.setTitle(title);
 		ad.setFull_text(full_text);
 		ad.setShort_text(short_text);
+		ad.setTag(tag);
 		ad.setCost(cost);
 		adRepository.save(ad);
 
