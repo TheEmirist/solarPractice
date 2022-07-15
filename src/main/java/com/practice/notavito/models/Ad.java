@@ -1,9 +1,12 @@
 package com.practice.notavito.models;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Ad {
@@ -14,14 +17,19 @@ public class Ad {
 
     private String title, short_text, full_text;
     private int cost;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User author;
     
     public Ad() {
     }
-    public Ad(String title, String short_text, String full_text, int cost) {
+    public Ad(String title, String short_text, String full_text, int cost, User user) {
         this.title = title;
         this.short_text = short_text;
         this.full_text = full_text;
         this.cost = cost;
+        this.author = user;
     }
     public Long getId() {
         return id;
@@ -53,5 +61,15 @@ public class Ad {
     public void setFull_text(String full_text) {
         this.full_text = full_text;
     }
+    
+    public User getAuthor() {
+        return author;
+    }
+    public void setAuthor(User author) {
+        this.author = author;
+    }
 
+    public String getAuthorName() {
+        return author != null ? author.getUsername() : "<none>";
+    }
 }

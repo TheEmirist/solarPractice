@@ -12,6 +12,7 @@
             <h3 th:text="${el.title}"/>
             <p><b>Цена:</b> <span th:text="${el.cost}"/></p>
             <p th:text="${el.short_text}"/>
+            <p th:text="${el.getAuthorName()}"/>
             <a th:href="'/' + ${el.getId()}" class="btn btn-warning">Открыть полностью</a>
         </div>
         </div>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.practice.notavito.models.Ad;
+import com.practice.notavito.models.User;
 import com.practice.notavito.repo.AdRepository;
 
 @Controller
@@ -26,8 +28,11 @@ public class AdController {
 	}
 
 	@PostMapping("/addAd")
-	public String postAd(@RequestParam String title, @RequestParam String short_text, @RequestParam String full_text, @RequestParam int cost, Model model) {
-		Ad ad = new Ad(title, short_text, full_text, cost);
+	public String postAd(
+		@AuthenticationPrincipal User user,
+		@RequestParam String title, @RequestParam String short_text, 
+		@RequestParam String full_text, @RequestParam int cost, Model model) {
+		Ad ad = new Ad(title, short_text, full_text, cost, user);
 		adRepository.save(ad);
         
 		return "redirect:/";
